@@ -13,9 +13,11 @@ def create_table():
     cursor.execute('''
         CREATE TABLE employees_department (
         e_name varchar(20),
-        e_salary int,
-        d_id int )
+        e_salary number,
+        d_name varchar(30)
+        )
     ''')
     connect.commit()
     cursor.close()
     connect.close()
+
