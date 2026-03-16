@@ -1,9 +1,11 @@
 def data_insert(name, salary, department, connect):
     cursor = connect.cursor()
+    department = department.upper()
     cursor.execute(
-        "INSERT INTO employees_department(e_name, e_salary, d_id) VALUES (:1, :2, :3)", (name, salary, department)
+        "INSERT INTO employees_department(e_name, e_salary, d_name) VALUES (:1, :2, :3)", (name, salary, department)
     )
     connect.commit()
+
 
 
 def data_select(connect):
