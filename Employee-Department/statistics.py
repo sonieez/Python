@@ -3,11 +3,11 @@ def dep_salary(connect):
     departments = {}
     cursor.execute("select * from employees_department")
     for row in cursor:
-        dep_id = row[2]
+        dep_name = row[2].lower().strip()
         salary = row[1]
-        if dep_id not in departments:
-            departments[dep_id] = []
-        departments[dep_id].append(salary)
+        if dep_name not in departments:
+            departments[dep_name] = []
+        departments[dep_name].append(salary)
 
     salary = {}
     for key, value in departments.items():
@@ -23,6 +23,7 @@ def dep_salary(connect):
 
 def output(salary):
     print("\n--Departments Statistics--")
+    print("\nDepartment | Max salary | Min salary")
     for key, value in salary.items():
-        print(f"{key}: Max salary = {value[0]}, Min salary = {value[1]}")
+        print(f"{key.upper():<10} | {value[0]:<10} | {value[1]}")
 
