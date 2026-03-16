@@ -6,7 +6,7 @@
 # 5) appdb.py
 #ad, maas, dep_id
 
-from db import get_connection, create_table
+from db import get_connection
 from validation import is_valid
 from employee import data_insert, data_select, salary_check
 from statistics import dep_salary, output
@@ -27,16 +27,16 @@ def main():
         if choice == 1:
             name = input("Enter employee name: ")
             salary = int(input("Enter employee salary: "))
-            department_id = int(input("Enter department id: "))
-            if is_valid(name, salary, department_id):
-                data_insert(name, salary, department_id, connection)
+            department_name = input("Enter department name: ")
+            if is_valid(name, salary, department_name):
+                data_insert(name, salary, department_name, connection)
                 print('\nEmployee data inserted')
             else:
                 print('\nEmployee data not inserted')
 
         elif choice == 2:
             data = data_select(connection)
-            print("\nEmployee | Salary | Department ID")
+            print("\nEmployee | Salary | Department Name")
             for row in data:
                 print(f"{row[0]:<8} | {row[1]:<6} | {row[2]}")
 
@@ -46,8 +46,10 @@ def main():
 
         elif choice == 4:
             high_salaries = salary_check(connection)
+            print("Descending salaries:")
+            print("\nEmployee | Salary | Department Name")
             for row in high_salaries:
-                print(f"{row[0]} | {row[1]} | {row[2]}")
+                print(f"{row[0]:<8} | {row[1]:<6} | {row[2]}")
 
         elif choice == 0:
             print("Exit..")
